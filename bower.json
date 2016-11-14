@@ -1,0 +1,24 @@
+{
+  "name": "service queue",
+  "description": "Teste de pedidos",
+  "main": "index.js",
+  "authors": [
+    "michelpm1 <michelpm1@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "toastr": "^2.1.3",
+    "angular-toastr": "^2.1.1"
+  }
+}

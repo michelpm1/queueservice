@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Michel Socket.io Tests</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/loja.css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.min.css">
+  </head>
+  <body ng-cloak>
+    <div class="container" ng-controller="LojaController as loja">
+      <div class="row">
+        <div class="page-header">
+          <h1>Restaurante Gourmelandia</h1>
+        </div>
+      </div>
+      <div class="row">
+        <form name="formPedidos" class="form-inline" ng-submit="loja.enviar()">
+          <div class="form-group">
+            <input class="form-control" size="30" ng-model="loja.pedido.usuario" placeholder="Nome do Cliente" required>
+            <select id="selectFood" class="form-control" ng-model ="loja.selectedPedido.id" required>
+              <option label="Qual seu pedido?" value=""></option>
+              <option label="Cordon Blue" value="1"></option>
+              <option label="Ceviche" value="2"></option>
+              <option label="Ostras marinadas" value="3"></option>
+              <option label="Lagostim da ilha" value="4"></option>
+              <option label="Sorvete Gourmet" value="5"></option>
+            </select>
+            <button class="btn btn-primary btn-xs" type="submit" ng-disabled="formPedidos.$invalid">Enviar</button>
+          </div>
+        </form>
+      </div>
+      <br>
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <caption>Pedidos</caption>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Cliente</th>
+                <th>Pedido</th>
+                <th>Hora do pedido</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="pedido in loja.pedidos | orderBy: '-id'"
+              ng-class="{'success': pedido.status ==='Atendido', 'warning': pedido.status ==='Preparando','danger': pedido.status ==='Solicitado'}">
+                <td>{{pedido.id}}</td>
+                <td>{{pedido.usuario}}</td>
+                <td>{{pedido.item}}</td>
+                <td>{{pedido.data | date: 'HH:mm:ss'}}</td>
+                <td>{{pedido.status}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+
+
+      <script src="app.js"></script>
+      <script src="controller/lojaController.js"></script>
+    </body>
+  </html>
